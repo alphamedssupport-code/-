@@ -1,0 +1,149 @@
+{
+  "id": "welcome",
+  "name": "ウェルカムフロー（友だち追加時）",
+  "trigger": "follow",
+  "initial_state": "send_welcome",
+  "states": [
+    {
+      "id": "send_welcome",
+      "description": "友だち追加時のウェルカムメッセージを送信し、問い合わせ種別を選択させる",
+      "messages": [
+        {
+          "type": "flex",
+          "template_ref": "templates/flex-welcome.json"
+        },
+        {
+          "type": "text",
+          "text": "はじめまして！\n\n当社LINEアカウントへようこそ🏠\n\n不動産に関するご相談を、このLINEで24時間受け付けております。\n\n以下からご用件をお選びください👇"
+        }
+      ],
+      "quick_replies": [
+        {
+          "label": "🏠 物件を購入したい",
+          "text": "購入希望",
+          "next_flow": "buyer"
+        },
+        {
+          "label": "💰 物件を売却したい",
+          "text": "売却希望",
+          "next_flow": "seller"
+        },
+        {
+          "label": "🔑 物件を借りたい",
+          "text": "賃貸希望",
+          "next_flow": "renter"
+        },
+        {
+          "label": "❓ その他・相談したい",
+          "text": "その他",
+          "next_state": "handle_other"
+        }
+      ],
+      "transitions": [
+        {
+          "match": "購入希望",
+          "next_flow": "buyer"
+        },
+        {
+          "match": "売却希望",
+          "next_flow": "seller"
+        },
+        {
+          "match": "賃貸希望",
+          "next_flow": "renter"
+        },
+        {
+          "match": "その他",
+          "next_state": "handle_other"
+        },
+        {
+          "match": "*",
+          "next_state": "clarify_intent"
+        }
+      ]
+    },
+    {
+      "id": "clarify_intent",
+      "description": "意図が不明な入力に対して再度選択を促す",
+      "messages": [
+        {
+          "type": "text",
+          "text": "ありがとうございます😊\n\nお手数ですが、以下からご用件をお選びいただけますか？"
+        }
+      ],
+      "quick_replies": [
+        {
+          "label": "🏠 物件を購入したい",
+          "text": "購入希望",
+          "next_flow": "buyer"
+        },
+        {
+          "label": "💰 物件を売却したい",
+          "text": "売却希望",
+          "next_flow": "seller"
+        },
+        {
+          "label": "🔑 物件を借りたい",
+          "text": "賃貸希望",
+          "next_flow": "renter"
+        },
+        {
+          "label": "❓ その他・相談したい",
+          "text": "その他",
+          "next_state": "handle_other"
+        }
+      ],
+      "transitions": [
+        {
+          "match": "購入希望",
+          "next_flow": "buyer"
+        },
+        {
+          "match": "売却希望",
+          "next_flow": "seller"
+        },
+        {
+          "match": "賃貸希望",
+          "next_flow": "renter"
+        },
+        {
+          "match": "その他",
+          "next_state": "handle_other"
+        },
+        {
+          "match": "*",
+          "next_state": "clarify_intent"
+        }
+      ]
+    },
+    {
+      "id": "handle_other",
+      "description": "その他・相談の場合は担当者対応へ誘導する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "承知いたしました！\n\nご相談内容をこちらのメッセージに自由にご記入ください✍️\n\n担当者が確認次第、折り返しご連絡いたします。\n（営業時間：平日 9:00〜18:00）"
+        }
+      ],
+      "transitions": [
+        {
+          "match": "*",
+          "action": "notify_agent",
+          "priority": "medium",
+          "next_state": "other_received"
+        }
+      ]
+    },
+    {
+      "id": "other_received",
+      "description": "その他メッセージ受信確認",
+      "messages": [
+        {
+          "type": "text",
+          "text": "ご連絡ありがとうございます📩\n\n内容を担当者に共有いたしました。\n近日中にご連絡差し上げますので、今しばらくお待ちください。"
+        }
+      ],
+      "transitions": []
+    }
+  ]
+}

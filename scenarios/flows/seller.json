@@ -1,0 +1,297 @@
+{
+  "id": "seller",
+  "name": "売却希望フロー",
+  "initial_state": "seller_greeting",
+  "states": [
+    {
+      "id": "seller_greeting",
+      "type": "message",
+      "description": "売却希望者へのウェルカムメッセージ",
+      "messages": [
+        {
+          "type": "text",
+          "text": "物件売却のご相談ですね💰\n\nまずは無料査定のご案内をさせてください📊\n\nいくつかご質問にお答えいただくだけで、担当者が最適なご提案をいたします。\n所要時間は約2分です。"
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_property_address" }
+      ]
+    },
+    {
+      "id": "ask_property_address",
+      "type": "question",
+      "description": "物件所在地を収集する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【1/6】売却をお考えの物件はどちらにありますか？\n\n都道府県・市区町村まで教えてください。\n（例：東京都世田谷区）"
+        }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "property_address" }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_property_type" }
+      ]
+    },
+    {
+      "id": "ask_property_type",
+      "type": "question",
+      "description": "物件種別を収集する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【2/6】物件の種類を教えてください。"
+        }
+      ],
+      "quick_replies": [
+        { "label": "🏠 一戸建て", "text": "一戸建て" },
+        { "label": "🏢 マンション", "text": "マンション" },
+        { "label": "🌿 土地", "text": "土地" },
+        { "label": "🏗️ その他", "text": "その他" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "property_type" }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_property_age" }
+      ]
+    },
+    {
+      "id": "ask_property_age",
+      "type": "question",
+      "description": "築年数を収集する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【3/6】おおよその築年数を教えてください。"
+        }
+      ],
+      "quick_replies": [
+        { "label": "〜5年", "text": "5年以内" },
+        { "label": "6〜15年", "text": "6〜15年" },
+        { "label": "16〜25年", "text": "16〜25年" },
+        { "label": "26年以上", "text": "26年以上" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "property_age" }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_sell_timeline" }
+      ]
+    },
+    {
+      "id": "ask_sell_timeline",
+      "type": "question",
+      "description": "売却時期を収集してスコアに加算する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【4/6】いつ頃の売却をお考えですか？"
+        }
+      ],
+      "quick_replies": [
+        { "label": "今すぐ〜3ヶ月以内", "text": "3ヶ月以内" },
+        { "label": "半年以内", "text": "半年以内" },
+        { "label": "1年以内", "text": "1年以内" },
+        { "label": "まだ未定", "text": "未定" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "sell_timeline" },
+        {
+          "type": "add_score",
+          "score_map": {
+            "3ヶ月以内": 35,
+            "半年以内": 20,
+            "1年以内": 10,
+            "未定": 0
+          }
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_sell_reason" }
+      ]
+    },
+    {
+      "id": "ask_sell_reason",
+      "type": "question",
+      "description": "売却理由を収集する（任意）",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【5/6】売却のご理由をお聞かせください。\n（任意）"
+        }
+      ],
+      "quick_replies": [
+        { "label": "🏠 住み替え", "text": "住み替え" },
+        { "label": "📋 相続", "text": "相続" },
+        { "label": "💴 資金化", "text": "資金化" },
+        { "label": "その他", "text": "その他" },
+        { "label": "回答しない", "text": "回答しない" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "sell_reason" },
+        {
+          "type": "add_score",
+          "score_map": {
+            "住み替え": 10,
+            "相続": 15,
+            "資金化": 15,
+            "その他": 5,
+            "回答しない": 0
+          }
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_other_agents" }
+      ]
+    },
+    {
+      "id": "ask_other_agents",
+      "type": "question",
+      "description": "他社への相談状況を収集してスコアに加算する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【6/6】現在、他の不動産会社にもご相談されていますか？"
+        }
+      ],
+      "quick_replies": [
+        { "label": "いいえ（初めての相談）", "text": "初めて" },
+        { "label": "はい（複数社に相談中）", "text": "複数社" },
+        { "label": "まだ相談していない", "text": "未相談" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "other_agents" },
+        {
+          "type": "add_score",
+          "score_map": {
+            "初めて": 20,
+            "未相談": 15,
+            "複数社": 5
+          }
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_contact_name" }
+      ]
+    },
+    {
+      "id": "ask_contact_name",
+      "type": "question",
+      "description": "お名前を収集する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "ありがとうございます！\n\nご連絡先を教えてください。\nまずお名前をお願いします。\n（例：田中 太郎）"
+        }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "name" }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_contact_phone" }
+      ]
+    },
+    {
+      "id": "ask_contact_phone",
+      "type": "question",
+      "description": "電話番号を収集してスコアに加算する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "お電話番号をご入力ください📞\n（例：090-1234-5678）"
+        }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "phone" },
+        { "type": "add_score", "value": 15 }
+      ],
+      "transitions": [
+        { "match": "*", "next": "score_branch" }
+      ]
+    },
+    {
+      "id": "score_branch",
+      "type": "branch",
+      "description": "スコアに応じてHOT/WARM/COLDに振り分ける",
+      "messages": [],
+      "transitions": [
+        { "condition": "score >= 70", "next": "hot_lead" },
+        { "condition": "score >= 40", "next": "warm_lead" },
+        { "condition": "score < 40", "next": "cold_lead" }
+      ]
+    },
+    {
+      "id": "hot_lead",
+      "type": "action",
+      "description": "HOTリードを担当者に即時通知し査定予約へ誘導する",
+      "actions": [
+        { "type": "create_lead", "priority": "HOT" },
+        { "type": "notify_agent", "urgency": "immediate" },
+        { "type": "enroll_nurture", "sequence": "seller-nurture" }
+      ],
+      "messages": [
+        {
+          "type": "flex",
+          "template_ref": "templates/flex-lead-summary.json"
+        },
+        {
+          "type": "text",
+          "text": "ありがとうございます、{{name}} 様！🎉\n\n売却のご相談内容を担当者に共有しました。\n本日中にご連絡いたします。\n\n無料査定のご予約もいただけます👇"
+        }
+      ],
+      "quick_replies": [
+        { "label": "📅 査定を予約する", "text": "査定予約", "next_flow": "appointment" },
+        { "label": "連絡を待つ", "text": "連絡待ち", "next": "flow_complete" }
+      ],
+      "transitions": [
+        { "match": "査定予約", "next_flow": "appointment" },
+        { "match": "*", "next": "flow_complete" }
+      ]
+    },
+    {
+      "id": "warm_lead",
+      "type": "action",
+      "description": "WARMリードを登録しナーチャリングシーケンスを開始する",
+      "actions": [
+        { "type": "create_lead", "priority": "WARM" },
+        { "type": "notify_agent", "urgency": "standard" },
+        { "type": "enroll_nurture", "sequence": "seller-nurture" }
+      ],
+      "messages": [
+        {
+          "type": "text",
+          "text": "ありがとうございます、{{name}} 様！😊\n\nご相談内容を確認いたしました。\n担当者より改めてご連絡差し上げます。\n\nそれまでの間、売却に役立つ情報をお届けしますね📊"
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "flow_complete" }
+      ]
+    },
+    {
+      "id": "cold_lead",
+      "type": "action",
+      "description": "COLDリードを登録し定期配信に登録する",
+      "actions": [
+        { "type": "create_lead", "priority": "COLD" },
+        { "type": "enroll_nurture", "sequence": "seller-nurture-light" }
+      ],
+      "messages": [
+        {
+          "type": "text",
+          "text": "ご相談ありがとうございます、{{name}} 様！\n\n定期的に不動産市況レポートや売却のお役立ち情報をお届けします📩\n\nご検討が進んだ際は、いつでもお声がけください！"
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "flow_complete" }
+      ]
+    },
+    {
+      "id": "flow_complete",
+      "type": "terminal",
+      "description": "売却フロー完了",
+      "messages": []
+    }
+  ]
+}

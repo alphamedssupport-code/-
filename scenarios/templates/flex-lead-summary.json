@@ -1,0 +1,228 @@
+{
+  "_comment": "LINE Flex Message — 担当者への新規リード通知カード（エージェント向け）",
+  "type": "bubble",
+  "header": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "text",
+            "text": "🔔 新規リード通知",
+            "weight": "bold",
+            "color": "#ffffff",
+            "size": "lg",
+            "flex": 1
+          },
+          {
+            "type": "text",
+            "text": "{{priority_label}}",
+            "weight": "bold",
+            "color": "#ffffff",
+            "size": "md",
+            "align": "end",
+            "flex": 0
+          }
+        ]
+      }
+    ],
+    "backgroundColor": "{{priority_color}}",
+    "paddingAll": "15px"
+  },
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "md",
+    "contents": [
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "text",
+            "text": "お名前",
+            "size": "sm",
+            "color": "#888888",
+            "flex": 2
+          },
+          {
+            "type": "text",
+            "text": "{{name}} 様",
+            "size": "sm",
+            "weight": "bold",
+            "flex": 3
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "text",
+            "text": "種別",
+            "size": "sm",
+            "color": "#888888",
+            "flex": 2
+          },
+          {
+            "type": "text",
+            "text": "{{intent_label}}",
+            "size": "sm",
+            "flex": 3
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "text",
+            "text": "エリア",
+            "size": "sm",
+            "color": "#888888",
+            "flex": 2
+          },
+          {
+            "type": "text",
+            "text": "{{preferred_area}}",
+            "size": "sm",
+            "flex": 3
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "text",
+            "text": "予算",
+            "size": "sm",
+            "color": "#888888",
+            "flex": 2
+          },
+          {
+            "type": "text",
+            "text": "{{budget_range}}",
+            "size": "sm",
+            "flex": 3
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "text",
+            "text": "時期",
+            "size": "sm",
+            "color": "#888888",
+            "flex": 2
+          },
+          {
+            "type": "text",
+            "text": "{{timeline}}",
+            "size": "sm",
+            "flex": 3
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "text",
+            "text": "電話番号",
+            "size": "sm",
+            "color": "#888888",
+            "flex": 2
+          },
+          {
+            "type": "text",
+            "text": "{{phone}}",
+            "size": "sm",
+            "weight": "bold",
+            "color": "#1a73e8",
+            "flex": 3
+          }
+        ]
+      },
+      {
+        "type": "separator"
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "text",
+            "text": "スコア",
+            "size": "sm",
+            "color": "#888888",
+            "flex": 2
+          },
+          {
+            "type": "text",
+            "text": "{{score}} / 100点",
+            "size": "sm",
+            "weight": "bold",
+            "color": "{{priority_color}}",
+            "flex": 3
+          }
+        ]
+      },
+      {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "text",
+            "text": "受信時刻",
+            "size": "sm",
+            "color": "#888888",
+            "flex": 2
+          },
+          {
+            "type": "text",
+            "text": "{{received_at}}",
+            "size": "sm",
+            "flex": 3
+          }
+        ]
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "button",
+        "style": "primary",
+        "color": "#1a73e8",
+        "action": {
+          "type": "uri",
+          "label": "💬 LINEで返信する",
+          "uri": "https://line.me/R/oaMessage/{{line_user_id}}"
+        }
+      },
+      {
+        "type": "button",
+        "style": "secondary",
+        "action": {
+          "type": "uri",
+          "label": "📞 電話番号を表示",
+          "uri": "tel:{{phone}}"
+        }
+      }
+    ]
+  }
+}

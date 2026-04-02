@@ -1,0 +1,98 @@
+{
+  "version": "1.0.0",
+  "description": "担当者ルーティング設定。エリア・物件種別・問い合わせ種別に応じて通知先担当者を決定する。",
+  "notification_settings": {
+    "HOT": {
+      "method": "immediate",
+      "description": "HOTリードは即時通知（個人LINEへ直接送信）"
+    },
+    "WARM": {
+      "method": "immediate",
+      "description": "WARMリードも即時通知（グループまたは個人）"
+    },
+    "COLD": {
+      "method": "daily_batch",
+      "batch_time": "09:00",
+      "description": "COLDリードは毎朝9時にまとめて通知"
+    }
+  },
+  "default_agent": {
+    "name": "総合担当",
+    "line_user_id": "${AGENT_LINE_USER_ID}",
+    "line_group_id": "${AGENT_LINE_GROUP_ID}",
+    "description": "ルーティングに合致するルールがない場合のデフォルト担当者"
+  },
+  "routing_rules": [
+    {
+      "rule_id": "tokyo_buy",
+      "description": "東京都内・購入希望",
+      "conditions": {
+        "intent": "buyer",
+        "area_match": ["東京都内", "東京"]
+      },
+      "agent": {
+        "name": "東京エリア購入担当",
+        "line_user_id": "${AGENT_TOKYO_BUY_LINE_USER_ID}",
+        "fallback": "default_agent"
+      }
+    },
+    {
+      "rule_id": "kanagawa_buy",
+      "description": "神奈川県・購入希望",
+      "conditions": {
+        "intent": "buyer",
+        "area_match": ["神奈川県", "横浜", "川崎"]
+      },
+      "agent": {
+        "name": "神奈川エリア購入担当",
+        "line_user_id": "${AGENT_KANAGAWA_BUY_LINE_USER_ID}",
+        "fallback": "default_agent"
+      }
+    },
+    {
+      "rule_id": "sell_mansion",
+      "description": "マンション売却",
+      "conditions": {
+        "intent": "seller",
+        "property_type_match": ["マンション"]
+      },
+      "agent": {
+        "name": "マンション売却専門担当",
+        "line_user_id": "${AGENT_SELL_MANSION_LINE_USER_ID}",
+        "fallback": "default_agent"
+      }
+    },
+    {
+      "rule_id": "sell_house",
+      "description": "一戸建て・土地売却",
+      "conditions": {
+        "intent": "seller",
+        "property_type_match": ["一戸建て", "土地"]
+      },
+      "agent": {
+        "name": "戸建て・土地売却専門担当",
+        "line_user_id": "${AGENT_SELL_HOUSE_LINE_USER_ID}",
+        "fallback": "default_agent"
+      }
+    },
+    {
+      "rule_id": "rent_all",
+      "description": "賃貸希望（全エリア）",
+      "conditions": {
+        "intent": "renter"
+      },
+      "agent": {
+        "name": "賃貸担当",
+        "line_user_id": "${AGENT_RENT_LINE_USER_ID}",
+        "fallback": "default_agent"
+      }
+    }
+  ],
+  "routing_priority": [
+    "tokyo_buy",
+    "kanagawa_buy",
+    "sell_mansion",
+    "sell_house",
+    "rent_all"
+  ]
+}

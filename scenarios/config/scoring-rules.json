@@ -1,0 +1,181 @@
+{
+  "version": "1.0.0",
+  "description": "リードスコアリングルール設定。各フローの回答に基づいてスコアを算出し、HOT/WARM/COLDに分類する。",
+  "thresholds": {
+    "HOT": 70,
+    "WARM": 40,
+    "COLD": 0
+  },
+  "priority_labels": {
+    "HOT": "🔥 HOT（優先）",
+    "WARM": "🌤 WARM（通常）",
+    "COLD": "❄️ COLD（育成）"
+  },
+  "priority_colors": {
+    "HOT": "#ea4335",
+    "WARM": "#fbbc04",
+    "COLD": "#4285f4"
+  },
+  "rules": {
+    "buyer": {
+      "description": "購入希望者スコアリングルール（最大100点）",
+      "fields": {
+        "purchase_timeline": {
+          "description": "購入時期が近いほど高スコア",
+          "max_points": 35,
+          "values": {
+            "3ヶ月以内": 35,
+            "半年以内": 20,
+            "1年以内": 10,
+            "未定": 0
+          }
+        },
+        "financing_status": {
+          "description": "ローン準備が進んでいるほど高スコア",
+          "max_points": 30,
+          "values": {
+            "現金購入": 30,
+            "事前審査済み": 25,
+            "検討中": 15,
+            "これから調べる": 5
+          }
+        },
+        "budget_range": {
+          "description": "予算が明確であれば加点",
+          "max_points": 15,
+          "values": {
+            "〜3000万": 15,
+            "3000〜5000万": 15,
+            "5000万〜1億": 15,
+            "1億以上": 15,
+            "未定": 0
+          }
+        },
+        "phone": {
+          "description": "電話番号提供で加点",
+          "max_points": 15,
+          "condition": "provided",
+          "points": 15
+        },
+        "preferred_area": {
+          "description": "エリアが明確であれば加点",
+          "max_points": 5,
+          "condition": "not_default",
+          "not_default_values": ["その他"],
+          "points": 5
+        }
+      }
+    },
+    "seller": {
+      "description": "売却希望者スコアリングルール（最大100点）",
+      "fields": {
+        "sell_timeline": {
+          "description": "売却時期が近いほど高スコア",
+          "max_points": 35,
+          "values": {
+            "3ヶ月以内": 35,
+            "半年以内": 20,
+            "1年以内": 10,
+            "未定": 0
+          }
+        },
+        "other_agents": {
+          "description": "独占交渉の可能性が高いほど高スコア",
+          "max_points": 20,
+          "values": {
+            "初めて": 20,
+            "未相談": 15,
+            "複数社": 5
+          }
+        },
+        "sell_reason": {
+          "description": "売却理由の明確さ・緊急度",
+          "max_points": 15,
+          "values": {
+            "相続": 15,
+            "資金化": 15,
+            "住み替え": 10,
+            "その他": 5,
+            "回答しない": 0
+          }
+        },
+        "phone": {
+          "description": "電話番号提供で加点",
+          "max_points": 15,
+          "condition": "provided",
+          "points": 15
+        },
+        "property_address": {
+          "description": "物件所在地が明確であれば加点",
+          "max_points": 10,
+          "condition": "provided",
+          "points": 10
+        },
+        "price_expectation": {
+          "description": "売却希望価格が明確であれば加点",
+          "max_points": 5,
+          "condition": "not_default",
+          "not_default_values": ["査定に任せる"],
+          "points": 5
+        }
+      }
+    },
+    "renter": {
+      "description": "賃貸希望者スコアリングルール（最大100点）",
+      "thresholds_override": {
+        "HOT": 60,
+        "WARM": 30,
+        "COLD": 0
+      },
+      "fields": {
+        "move_in_date": {
+          "description": "入居時期が近いほど高スコア",
+          "max_points": 35,
+          "values": {
+            "即入居": 35,
+            "1ヶ月以内": 25,
+            "2〜3ヶ月": 15,
+            "未定": 0
+          }
+        },
+        "rent_budget": {
+          "description": "予算が明確であれば加点",
+          "max_points": 15,
+          "values": {
+            "5万以下": 10,
+            "5〜8万": 15,
+            "8〜12万": 15,
+            "12万以上": 15
+          }
+        },
+        "room_type": {
+          "description": "間取りが明確であれば加点",
+          "max_points": 10,
+          "condition": "not_default",
+          "not_default_values": ["こだわらない"],
+          "points": 10
+        },
+        "phone": {
+          "description": "電話番号提供で加点",
+          "max_points": 15,
+          "condition": "provided",
+          "points": 15
+        },
+        "preferred_area": {
+          "description": "エリアが明確であれば加点",
+          "max_points": 10,
+          "condition": "not_default",
+          "not_default_values": ["その他"],
+          "points": 10
+        },
+        "special_conditions": {
+          "description": "特別条件が明確であれば加点",
+          "max_points": 5,
+          "condition": "not_default",
+          "not_default_values": ["なし"],
+          "points": 5
+        }
+      }
+    }
+  }
+}

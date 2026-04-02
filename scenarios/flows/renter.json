@@ -1,0 +1,274 @@
+{
+  "id": "renter",
+  "name": "賃貸希望フロー",
+  "initial_state": "renter_greeting",
+  "states": [
+    {
+      "id": "renter_greeting",
+      "type": "message",
+      "description": "賃貸希望者へのウェルカムメッセージ",
+      "messages": [
+        {
+          "type": "text",
+          "text": "賃貸物件のご相談ですね🔑\n\nご希望の条件をお聞かせください。\nピッタリの物件をご紹介します！\n所要時間は約2分です😊"
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_rent_area" }
+      ]
+    },
+    {
+      "id": "ask_rent_area",
+      "type": "question",
+      "description": "希望エリアを収集する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【1/6】ご希望のエリアはどちらですか？\n\n具体的な駅名や市区町村をご入力いただくか、下記からお選びください。"
+        }
+      ],
+      "quick_replies": [
+        { "label": "東京都内", "text": "東京都内" },
+        { "label": "神奈川県", "text": "神奈川県" },
+        { "label": "埼玉県", "text": "埼玉県" },
+        { "label": "千葉県", "text": "千葉県" },
+        { "label": "その他", "text": "その他" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "preferred_area" }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_room_type" }
+      ]
+    },
+    {
+      "id": "ask_room_type",
+      "type": "question",
+      "description": "希望間取りを収集する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【2/6】ご希望の間取りを教えてください。"
+        }
+      ],
+      "quick_replies": [
+        { "label": "1K・1DK", "text": "1K〜1DK" },
+        { "label": "1LDK・2K", "text": "1LDK〜2K" },
+        { "label": "2LDK・3K", "text": "2LDK〜3K" },
+        { "label": "3LDK以上", "text": "3LDK以上" },
+        { "label": "こだわらない", "text": "こだわらない" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "room_type" }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_rent_budget" }
+      ]
+    },
+    {
+      "id": "ask_rent_budget",
+      "type": "question",
+      "description": "月額家賃予算を収集してスコアに加算する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【3/6】月額の家賃予算はいくらくらいをお考えですか？（管理費込み）"
+        }
+      ],
+      "quick_replies": [
+        { "label": "〜5万円", "text": "5万以下" },
+        { "label": "5〜8万円", "text": "5〜8万" },
+        { "label": "8〜12万円", "text": "8〜12万" },
+        { "label": "12万円以上", "text": "12万以上" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "rent_budget" },
+        {
+          "type": "add_score",
+          "score_map": {
+            "5万以下": 10,
+            "5〜8万": 15,
+            "8〜12万": 15,
+            "12万以上": 15
+          }
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_move_in_date" }
+      ]
+    },
+    {
+      "id": "ask_move_in_date",
+      "type": "question",
+      "description": "入居希望時期を収集してスコアに加算する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【4/6】入居のご希望はいつ頃ですか？"
+        }
+      ],
+      "quick_replies": [
+        { "label": "今すぐ入居したい", "text": "即入居" },
+        { "label": "1ヶ月以内", "text": "1ヶ月以内" },
+        { "label": "2〜3ヶ月以内", "text": "2〜3ヶ月" },
+        { "label": "未定", "text": "未定" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "move_in_date" },
+        {
+          "type": "add_score",
+          "score_map": {
+            "即入居": 35,
+            "1ヶ月以内": 25,
+            "2〜3ヶ月": 15,
+            "未定": 0
+          }
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_special_conditions" }
+      ]
+    },
+    {
+      "id": "ask_special_conditions",
+      "type": "question",
+      "description": "特別な条件を収集する（複数選択可）",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【5/6】特別なご希望はありますか？\n（複数あれば箇条書きでご入力ください）"
+        }
+      ],
+      "quick_replies": [
+        { "label": "🐾 ペット可", "text": "ペット可" },
+        { "label": "🚗 駐車場あり", "text": "駐車場" },
+        { "label": "🚭 禁煙", "text": "禁煙" },
+        { "label": "🛁 バス・トイレ別", "text": "バストイレ別" },
+        { "label": "特になし", "text": "なし" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "special_conditions" }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_contact_name" }
+      ]
+    },
+    {
+      "id": "ask_contact_name",
+      "type": "question",
+      "description": "お名前を収集する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【6/6】お名前を教えていただけますか？\n（例：田中 太郎）"
+        }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "name" }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_contact_phone" }
+      ]
+    },
+    {
+      "id": "ask_contact_phone",
+      "type": "question",
+      "description": "電話番号を収集してスコアに加算する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "ご連絡先のお電話番号をご入力ください📞\n（例：090-1234-5678）"
+        }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "phone" },
+        { "type": "add_score", "value": 15 }
+      ],
+      "transitions": [
+        { "match": "*", "next": "score_branch" }
+      ]
+    },
+    {
+      "id": "score_branch",
+      "type": "branch",
+      "description": "スコアに応じてHOT/WARM/COLDに振り分ける",
+      "messages": [],
+      "transitions": [
+        { "condition": "score >= 60", "next": "hot_lead" },
+        { "condition": "score >= 30", "next": "warm_lead" },
+        { "condition": "score < 30", "next": "cold_lead" }
+      ]
+    },
+    {
+      "id": "hot_lead",
+      "type": "action",
+      "description": "HOTリードを担当者に即時通知し内見予約へ誘導する",
+      "actions": [
+        { "type": "create_lead", "priority": "HOT" },
+        { "type": "notify_agent", "urgency": "immediate" },
+        { "type": "enroll_nurture", "sequence": "renter-nurture" }
+      ],
+      "messages": [
+        {
+          "type": "flex",
+          "template_ref": "templates/flex-lead-summary.json"
+        },
+        {
+          "type": "text",
+          "text": "ありがとうございます、{{name}} 様！🎉\n\nご希望条件に合った物件をご用意して、担当者がご連絡いたします。\n\nご都合のよい日時で内見のご予約もどうぞ👇"
+        }
+      ],
+      "quick_replies": [
+        { "label": "📅 内見を予約する", "text": "内見予約", "next_flow": "appointment" },
+        { "label": "連絡を待つ", "text": "連絡待ち", "next": "flow_complete" }
+      ],
+      "transitions": [
+        { "match": "内見予約", "next_flow": "appointment" },
+        { "match": "*", "next": "flow_complete" }
+      ]
+    },
+    {
+      "id": "warm_lead",
+      "type": "action",
+      "description": "WARMリードを登録しナーチャリングシーケンスを開始する",
+      "actions": [
+        { "type": "create_lead", "priority": "WARM" },
+        { "type": "notify_agent", "urgency": "standard" },
+        { "type": "enroll_nurture", "sequence": "renter-nurture" }
+      ],
+      "messages": [
+        {
+          "type": "text",
+          "text": "ありがとうございます、{{name}} 様！😊\n\nご希望条件を確認いたしました。\n担当者より改めてご連絡差し上げます。\n\nそれまでの間、おすすめ物件情報をお届けしますね🔑"
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "flow_complete" }
+      ]
+    },
+    {
+      "id": "cold_lead",
+      "type": "action",
+      "description": "COLDリードを登録し定期配信に登録する",
+      "actions": [
+        { "type": "create_lead", "priority": "COLD" },
+        { "type": "enroll_nurture", "sequence": "renter-nurture-light" }
+      ],
+      "messages": [
+        {
+          "type": "text",
+          "text": "ご相談ありがとうございます、{{name}} 様！\n\n定期的に新着物件情報をお届けします📩\n\nご入居のご検討が進んだ際は、お気軽にご相談ください！"
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "flow_complete" }
+      ]
+    },
+    {
+      "id": "flow_complete",
+      "type": "terminal",
+      "description": "賃貸フロー完了",
+      "messages": []
+    }
+  ]
+}

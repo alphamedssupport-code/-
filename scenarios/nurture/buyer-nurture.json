@@ -1,0 +1,94 @@
+{
+  "id": "buyer-nurture",
+  "name": "購入希望者 ナーチャリングシーケンス（HOT/WARM）",
+  "trigger": "buyer_flow_complete",
+  "target_priorities": ["HOT", "WARM"],
+  "sequence": [
+    {
+      "step": 1,
+      "delay_days": 0,
+      "label": "即時フォロー",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、先ほどはご相談ありがとうございました！🏠\n\n担当者より改めてご連絡いたします。\n\nご質問やご不明な点があれば、このLINEにいつでもメッセージをお送りください😊"
+      }
+    },
+    {
+      "step": 2,
+      "delay_days": 1,
+      "label": "物件情報配信",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\nご希望の{{preferred_area}}エリアで、条件に合う物件をピックアップしました🏠\n\n↓担当者が選んだおすすめ物件をご確認ください。\n気になる物件があればお知らせください！"
+      }
+    },
+    {
+      "step": 3,
+      "delay_days": 3,
+      "label": "住宅購入の流れ教育コンテンツ",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\n本日は「住宅購入の流れ」をご紹介します📋\n\n【STEP 1】ご要望・予算の整理\n【STEP 2】物件探し・内覧\n【STEP 3】購入申し込み\n【STEP 4】住宅ローン審査\n【STEP 5】売買契約締結\n【STEP 6】引き渡し・入居\n\nわからないことがあれば、いつでもご相談ください！"
+      }
+    },
+    {
+      "step": 4,
+      "delay_days": 7,
+      "label": "エリア相場情報",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\n今月の{{preferred_area}}エリアの不動産相場をお知らせします📊\n\n最近の成約事例や価格動向を担当者がまとめています。\n相場感をつかむ参考にしてみてください。\n\n詳しい情報は担当者にお問い合わせください！"
+      }
+    },
+    {
+      "step": 5,
+      "delay_days": 10,
+      "label": "再エンゲージメント",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\nご検討はいかがでしょうか？🏠\n\n気になる物件はありましたか？\n内覧のご予約もお気軽にどうぞ！"
+      },
+      "quick_replies": [
+        { "label": "📅 内見を予約する", "text": "内見予約", "next_flow": "appointment" },
+        { "label": "💬 相談したい", "text": "相談", "next_flow": "welcome" },
+        { "label": "今は大丈夫です", "text": "後で" }
+      ]
+    },
+    {
+      "step": 6,
+      "delay_days": 14,
+      "label": "お客様の声",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\n先日、同じ{{preferred_area}}エリアでご購入されたお客様のご感想をご紹介します😊\n\n「担当者がとても丁寧に物件を選んでくれて、理想の家が見つかりました。内覧から契約まで安心してお任せできました！」\n（30代・ご夫婦）\n\nご不安な点は何でもご相談ください🏠"
+      }
+    },
+    {
+      "step": 7,
+      "delay_days": 21,
+      "label": "ソフト再クオリファイ",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\nご検討状況はいかがですか？"
+      },
+      "quick_replies": [
+        { "label": "🔥 積極的に探している", "text": "積極的に探している" },
+        { "label": "🤔 まだ検討中", "text": "まだ検討中" },
+        { "label": "⏸️ 一旦保留", "text": "保留" }
+      ]
+    },
+    {
+      "step": 8,
+      "delay_days": 30,
+      "label": "最終CTA",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\n1ヶ月前にご相談いただきありがとうございました🏠\n\n物件探しのご状況はいかがでしょうか？\n\nいつでも内覧のご予約や個別相談を承っております。\nぜひお気軽にご連絡ください😊"
+      },
+      "quick_replies": [
+        { "label": "📅 内見を予約する", "text": "内見予約", "next_flow": "appointment" },
+        { "label": "💬 改めて相談する", "text": "相談", "next_flow": "welcome" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "id": "seller-nurture",
+  "name": "売却希望者 ナーチャリングシーケンス（HOT/WARM）",
+  "trigger": "seller_flow_complete",
+  "target_priorities": ["HOT", "WARM"],
+  "sequence": [
+    {
+      "step": 1,
+      "delay_days": 0,
+      "label": "即時フォロー",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、先ほどはご相談ありがとうございました！\n\n担当者が査定内容を確認し、改めてご連絡いたします📊\n\nご質問があれば、このLINEにいつでもメッセージをどうぞ😊"
+      }
+    },
+    {
+      "step": 2,
+      "delay_days": 1,
+      "label": "エリア相場レポート",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\n{{property_address}}エリアの最新売却相場レポートをお送りします📈\n\n最近の成約事例を参考に、担当者が売却戦略をご提案いたします。\n\nより詳しいご相談は担当者までお気軽に！"
+      }
+    },
+    {
+      "step": 3,
+      "delay_days": 3,
+      "label": "成約事例のご紹介",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\n先月、{{property_address}}近辺で成約した物件をご紹介します🏠\n\n【成約事例】\n・種別: マンション\n・広さ: 70㎡\n・売却価格: 4,200万円\n・売却期間: 約2.5ヶ月\n\nご所有物件の条件によって異なりますが、参考にしてください。\n\n詳しい査定は担当者にお任せください！"
+      }
+    },
+    {
+      "step": 4,
+      "delay_days": 7,
+      "label": "売却の流れ教育コンテンツ",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\n「不動産売却の流れ（7ステップ）」をご案内します📋\n\n【STEP 1】査定依頼\n【STEP 2】媒介契約締結\n【STEP 3】売却活動開始\n【STEP 4】購入希望者との交渉\n【STEP 5】売買契約締結\n【STEP 6】引き渡し準備\n【STEP 7】決済・引き渡し\n\nご不明な点はいつでもご相談ください！"
+      }
+    },
+    {
+      "step": 5,
+      "delay_days": 10,
+      "label": "再エンゲージメント",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\n査定のご準備はいかがでしょうか？"
+      },
+      "quick_replies": [
+        { "label": "📅 査定を予約する", "text": "査定予約", "next_flow": "appointment" },
+        { "label": "💬 詳しく相談したい", "text": "相談", "next_flow": "welcome" },
+        { "label": "今は大丈夫です", "text": "後で" }
+      ]
+    },
+    {
+      "step": 6,
+      "delay_days": 14,
+      "label": "売却メリット訴求",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\n今が売り時かもしれません📈\n\n現在、{{property_address}}エリアの不動産需要は高く、売却しやすい状況が続いています。\n\n早めにご相談いただくと、より高い価格での売却が期待できます。\n\nまずは無料査定からいかがでしょうか？"
+      },
+      "quick_replies": [
+        { "label": "📊 無料査定を依頼する", "text": "査定予約", "next_flow": "appointment" }
+      ]
+    },
+    {
+      "step": 7,
+      "delay_days": 21,
+      "label": "ソフト再クオリファイ",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\n売却のご検討状況はいかがですか？"
+      },
+      "quick_replies": [
+        { "label": "🔥 積極的に進めたい", "text": "積極的" },
+        { "label": "🤔 まだ検討中", "text": "検討中" },
+        { "label": "⏸️ 一旦保留", "text": "保留" }
+      ]
+    },
+    {
+      "step": 8,
+      "delay_days": 30,
+      "label": "最終CTA",
+      "message": {
+        "type": "text",
+        "text": "{{name}} 様、こんにちは！\n\n1ヶ月前にご相談いただきありがとうございました。\n\n売却のご検討は進んでいますでしょうか？\n\n無料査定・個別相談をいつでも承っています。\nお気軽にご連絡ください😊"
+      },
+      "quick_replies": [
+        { "label": "📊 査定を予約する", "text": "査定予約", "next_flow": "appointment" },
+        { "label": "💬 改めて相談する", "text": "相談", "next_flow": "welcome" }
+      ]
+    }
+  ]
+}

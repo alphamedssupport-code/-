@@ -1,0 +1,150 @@
+{
+  "_comment": "LINE Flex Message — ウェルカムカルーセル（友だち追加時）",
+  "type": "carousel",
+  "contents": [
+    {
+      "type": "bubble",
+      "size": "mega",
+      "hero": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "🏠",
+            "size": "5xl",
+            "align": "center",
+            "margin": "lg"
+          }
+        ],
+        "backgroundColor": "#1a73e8",
+        "paddingAll": "20px"
+      },
+      "body": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "不動産のご相談は",
+            "weight": "bold",
+            "size": "lg",
+            "align": "center"
+          },
+          {
+            "type": "text",
+            "text": "このLINEで24時間OK！",
+            "weight": "bold",
+            "size": "xl",
+            "color": "#1a73e8",
+            "align": "center",
+            "margin": "sm"
+          },
+          {
+            "type": "separator",
+            "margin": "lg"
+          },
+          {
+            "type": "box",
+            "layout": "vertical",
+            "margin": "lg",
+            "spacing": "sm",
+            "contents": [
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "✅",
+                    "size": "sm",
+                    "flex": 0
+                  },
+                  {
+                    "type": "text",
+                    "text": "24時間・365日 自動対応",
+                    "size": "sm",
+                    "margin": "sm"
+                  }
+                ]
+              },
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "✅",
+                    "size": "sm",
+                    "flex": 0
+                  },
+                  {
+                    "type": "text",
+                    "text": "購入・売却・賃貸 全対応",
+                    "size": "sm",
+                    "margin": "sm"
+                  }
+                ]
+              },
+              {
+                "type": "box",
+                "layout": "horizontal",
+                "contents": [
+                  {
+                    "type": "text",
+                    "text": "✅",
+                    "size": "sm",
+                    "flex": 0
+                  },
+                  {
+                    "type": "text",
+                    "text": "担当者が迅速にフォロー",
+                    "size": "sm",
+                    "margin": "sm"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "footer": {
+        "type": "box",
+        "layout": "vertical",
+        "spacing": "sm",
+        "contents": [
+          {
+            "type": "button",
+            "style": "primary",
+            "color": "#1a73e8",
+            "action": {
+              "type": "message",
+              "label": "🏠 物件を購入したい",
+              "text": "購入希望"
+            }
+          },
+          {
+            "type": "button",
+            "style": "primary",
+            "color": "#34a853",
+            "action": {
+              "type": "message",
+              "label": "💰 物件を売却したい",
+              "text": "売却希望"
+            }
+          },
+          {
+            "type": "button",
+            "style": "primary",
+            "color": "#fbbc04",
+            "action": {
+              "type": "message",
+              "label": "🔑 物件を借りたい",
+              "text": "賃貸希望"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

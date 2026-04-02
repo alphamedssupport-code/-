@@ -1,0 +1,284 @@
+{
+  "id": "buyer",
+  "name": "購入希望フロー",
+  "initial_state": "buyer_greeting",
+  "states": [
+    {
+      "id": "buyer_greeting",
+      "type": "message",
+      "description": "購入希望者へのウェルカムメッセージ",
+      "messages": [
+        {
+          "type": "text",
+          "text": "物件購入のご相談ですね🏠\n\nご希望に合った物件をご紹介できるよう、いくつかご質問させてください。\n所要時間は約2分です😊"
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_area" }
+      ]
+    },
+    {
+      "id": "ask_area",
+      "type": "question",
+      "description": "希望エリアを収集する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【1/6】希望エリアはどちらをお考えですか？"
+        }
+      ],
+      "quick_replies": [
+        { "label": "東京都内", "text": "東京都内" },
+        { "label": "神奈川県", "text": "神奈川県" },
+        { "label": "埼玉県", "text": "埼玉県" },
+        { "label": "千葉県", "text": "千葉県" },
+        { "label": "その他", "text": "その他" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "preferred_area" }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_property_type" }
+      ]
+    },
+    {
+      "id": "ask_property_type",
+      "type": "question",
+      "description": "希望物件種別を収集する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【2/6】どのような物件をお探しですか？"
+        }
+      ],
+      "quick_replies": [
+        { "label": "🏠 一戸建て", "text": "一戸建て" },
+        { "label": "🏢 マンション", "text": "マンション" },
+        { "label": "🏗️ 新築希望", "text": "新築" },
+        { "label": "🏚️ 中古でもOK", "text": "中古" },
+        { "label": "まだ決めていない", "text": "未定" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "property_type" }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_budget" }
+      ]
+    },
+    {
+      "id": "ask_budget",
+      "type": "question",
+      "description": "予算帯を収集してスコアに加算する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【3/6】ご予算はどのくらいをお考えですか？"
+        }
+      ],
+      "quick_replies": [
+        { "label": "〜3,000万円", "text": "〜3000万" },
+        { "label": "3,000〜5,000万円", "text": "3000〜5000万" },
+        { "label": "5,000万〜1億円", "text": "5000万〜1億" },
+        { "label": "1億円以上", "text": "1億以上" },
+        { "label": "まだ検討中", "text": "未定" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "budget_range" },
+        {
+          "type": "add_score",
+          "score_map": {
+            "〜3000万": 15,
+            "3000〜5000万": 15,
+            "5000万〜1億": 15,
+            "1億以上": 15,
+            "未定": 0
+          }
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_timeline" }
+      ]
+    },
+    {
+      "id": "ask_timeline",
+      "type": "question",
+      "description": "購入時期を収集してスコアに加算する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【4/6】いつ頃のご購入をお考えですか？"
+        }
+      ],
+      "quick_replies": [
+        { "label": "今すぐ〜3ヶ月以内", "text": "3ヶ月以内" },
+        { "label": "半年以内", "text": "半年以内" },
+        { "label": "1年以内", "text": "1年以内" },
+        { "label": "まだ未定", "text": "未定" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "purchase_timeline" },
+        {
+          "type": "add_score",
+          "score_map": {
+            "3ヶ月以内": 35,
+            "半年以内": 20,
+            "1年以内": 10,
+            "未定": 0
+          }
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_financing" }
+      ]
+    },
+    {
+      "id": "ask_financing",
+      "type": "question",
+      "description": "住宅ローンの準備状況を収集してスコアに加算する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【5/6】住宅ローンのご準備はいかがですか？"
+        }
+      ],
+      "quick_replies": [
+        { "label": "✅ 事前審査済み", "text": "事前審査済み" },
+        { "label": "💭 検討中", "text": "検討中" },
+        { "label": "📚 これから調べる", "text": "これから調べる" },
+        { "label": "💴 現金購入予定", "text": "現金購入" }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "financing_status" },
+        {
+          "type": "add_score",
+          "score_map": {
+            "事前審査済み": 25,
+            "現金購入": 30,
+            "検討中": 15,
+            "これから調べる": 5
+          }
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_contact_name" }
+      ]
+    },
+    {
+      "id": "ask_contact_name",
+      "type": "question",
+      "description": "お名前を収集する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "【6/6】最後に、お名前を教えていただけますか？\n（例：田中 太郎）"
+        }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "name" }
+      ],
+      "transitions": [
+        { "match": "*", "next": "ask_contact_phone" }
+      ]
+    },
+    {
+      "id": "ask_contact_phone",
+      "type": "question",
+      "description": "電話番号を収集してスコアに加算する",
+      "messages": [
+        {
+          "type": "text",
+          "text": "ご連絡先のお電話番号をご入力ください📞\n（例：090-1234-5678）"
+        }
+      ],
+      "actions": [
+        { "type": "save_field", "field": "phone" },
+        { "type": "add_score", "value": 15 }
+      ],
+      "transitions": [
+        { "match": "*", "next": "score_branch" }
+      ]
+    },
+    {
+      "id": "score_branch",
+      "type": "branch",
+      "description": "スコアに応じてHOT/WARM/COLDに振り分ける",
+      "messages": [],
+      "transitions": [
+        { "condition": "score >= 70", "next": "hot_lead" },
+        { "condition": "score >= 40", "next": "warm_lead" },
+        { "condition": "score < 40", "next": "cold_lead" }
+      ]
+    },
+    {
+      "id": "hot_lead",
+      "type": "action",
+      "description": "HOTリードを担当者に即時通知し内見予約へ誘導する",
+      "actions": [
+        { "type": "create_lead", "priority": "HOT" },
+        { "type": "notify_agent", "urgency": "immediate" },
+        { "type": "enroll_nurture", "sequence": "buyer-nurture" }
+      ],
+      "messages": [
+        {
+          "type": "flex",
+          "template_ref": "templates/flex-lead-summary.json"
+        },
+        {
+          "type": "text",
+          "text": "ありがとうございます、{{name}} 様！🎉\n\nご希望の条件を担当者に共有しました。\n本日中にご連絡いたします。\n\nよろしければ、ご都合の良い日時で内見・ご相談のご予約もいただけます👇"
+        }
+      ],
+      "quick_replies": [
+        { "label": "📅 内見を予約する", "text": "内見予約", "next_flow": "appointment" },
+        { "label": "後で連絡を待つ", "text": "連絡待ち", "next": "flow_complete" }
+      ],
+      "transitions": [
+        { "match": "内見予約", "next_flow": "appointment" },
+        { "match": "*", "next": "flow_complete" }
+      ]
+    },
+    {
+      "id": "warm_lead",
+      "type": "action",
+      "description": "WARMリードを登録しナーチャリングシーケンスを開始する",
+      "actions": [
+        { "type": "create_lead", "priority": "WARM" },
+        { "type": "notify_agent", "urgency": "standard" },
+        { "type": "enroll_nurture", "sequence": "buyer-nurture" }
+      ],
+      "messages": [
+        {
+          "type": "text",
+          "text": "ありがとうございます、{{name}} 様！😊\n\nご希望の条件を確認いたしました。\n担当者より改めてご連絡差し上げます。\n\nそれまでの間、ご希望条件に合った物件情報をお届けしますね🏠"
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "flow_complete" }
+      ]
+    },
+    {
+      "id": "cold_lead",
+      "type": "action",
+      "description": "COLDリードを登録し定期配信に登録する",
+      "actions": [
+        { "type": "create_lead", "priority": "COLD" },
+        { "type": "enroll_nurture", "sequence": "buyer-nurture-light" }
+      ],
+      "messages": [
+        {
+          "type": "text",
+          "text": "ご相談ありがとうございます、{{name}} 様！\n\n定期的に新着物件情報や不動産に関するお役立ち情報をお届けします📩\n\nご検討が進んだ際は、いつでもお気軽にご相談ください！"
+        }
+      ],
+      "transitions": [
+        { "match": "*", "next": "flow_complete" }
+      ]
+    },
+    {
+      "id": "flow_complete",
+      "type": "terminal",
+      "description": "購入フロー完了",
+      "messages": []
+    }
+  ]
+}
