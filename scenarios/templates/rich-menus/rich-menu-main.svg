@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2500" height="1686" viewBox="0 0 2500 1686">
+  <defs>
+    <style>
+      .panel-label { font-family: 'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif; font-weight: 700; fill: #ffffff; text-anchor: middle; dominant-baseline: middle; }
+      .panel-sublabel { font-family: 'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', sans-serif; font-weight: 400; fill: rgba(255,255,255,0.85); text-anchor: middle; dominant-baseline: middle; }
+      .panel-icon { font-family: 'Apple Color Emoji', 'Segoe UI Emoji', sans-serif; text-anchor: middle; dominant-baseline: middle; }
+      .badge { font-family: 'Hiragino Sans', 'Yu Gothic', sans-serif; font-weight: 700; fill: #ffffff; text-anchor: middle; dominant-baseline: middle; font-size: 36px; }
+    </style>
+
+    <!-- Gradient definitions for each panel -->
+    <linearGradient id="grad-buy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1565c0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1a73e8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-sell" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1b5e20;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2e7d32;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-rent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e65100;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f57c00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-appt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a148c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7b1fa2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-agent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#004d40;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00796b;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad-valuation" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#b71c1c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c62828;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Hover effect overlay -->
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="rgba(0,0,0,0.3)"/>
+    </filter>
+  </defs>
+
+  <!-- ===================== ROW 1 ===================== -->
+
+  <!-- Panel 1: 購入相談 (Blue) -->
+  <rect x="0" y="0" width="833" height="843" fill="url(#grad-buy)"/>
+  <!-- Decorative circle background -->
+  <circle cx="416" cy="320" r="260" fill="rgba(255,255,255,0.06)"/>
+  <circle cx="100" cy="100" r="120" fill="rgba(255,255,255,0.04)"/>
+  <!-- Icon background circle -->
+  <circle cx="416" cy="290" r="130" fill="rgba(255,255,255,0.15)"/>
+  <!-- House icon (SVG shapes) -->
+  <g transform="translate(416, 290)">
+    <!-- Roof -->
+    <polygon points="-80,-60 0,-140 80,-60" fill="rgba(255,255,255,0.95)" />
+    <!-- Chimney -->
+    <rect x="30" y="-140" width="20" height="40" fill="rgba(255,255,255,0.9)"/>
+    <!-- Walls -->
+    <rect x="-65" y="-60" width="130" height="110" fill="rgba(255,255,255,0.85)"/>
+    <!-- Door -->
+    <rect x="-22" y="10" width="44" height="40" rx="4" fill="#1565c0"/>
+    <!-- Window left -->
+    <rect x="-55" y="-40" width="32" height="28" rx="3" fill="#1565c0"/>
+    <!-- Window right -->
+    <rect x="23" y="-40" width="32" height="28" rx="3" fill="#1565c0"/>
+  </g>
+  <!-- Text labels -->
+  <text x="416" y="510" class="panel-label" font-size="72">物件を購入したい</text>
+  <text x="416" y="598" class="panel-sublabel" font-size="48">購入相談・物件探し</text>
+  <!-- HOT badge -->
+  <rect x="30" y="30" width="160" height="60" rx="30" fill="rgba(255,200,0,0.9)"/>
+  <text x="110" y="61" class="badge" fill="#1a1a1a" font-size="32">24時間OK</text>
+  <!-- Bottom accent bar -->
+  <rect x="0" y="800" width="833" height="43" fill="rgba(255,255,255,0.15)"/>
+  <text x="416" y="821" class="panel-sublabel" font-size="36">タップして相談 →</text>
+
+  <!-- Panel 2: 売却相談 (Green) -->
+  <rect x="833" y="0" width="834" height="843" fill="url(#grad-sell)"/>
+  <circle cx="1250" cy="320" r="260" fill="rgba(255,255,255,0.06)"/>
+  <circle cx="1600" cy="120" r="100" fill="rgba(255,255,255,0.04)"/>
+  <!-- Icon background circle -->
+  <circle cx="1250" cy="290" r="130" fill="rgba(255,255,255,0.15)"/>
+  <!-- Yen/Money bag icon (SVG shapes) -->
+  <g transform="translate(1250, 290)">
+    <!-- Bag body -->
+    <ellipse cx="0" cy="30" rx="90" ry="90" fill="rgba(255,255,255,0.95)"/>
+    <!-- Bag neck -->
+    <rect x="-28" y="-60" width="56" height="50" rx="8" fill="rgba(255,255,255,0.85)"/>
+    <!-- Bag knot -->
+    <ellipse cx="0" cy="-70" rx="35" ry="20" fill="rgba(255,255,255,0.9)"/>
+    <!-- Yen symbol -->
+    <text x="0" y="42" font-family="sans-serif" font-size="72" font-weight="900" fill="#1b5e20" text-anchor="middle" dominant-baseline="middle">¥</text>
+  </g>
+  <text x="1250" y="510" class="panel-label" font-size="72">物件を売却したい</text>
+  <text x="1250" y="598" class="panel-sublabel" font-size="48">売却相談・無料査定</text>
+  <rect x="863" y="800" width="774" height="43" fill="rgba(255,255,255,0.15)"/>
+  <text x="1250" y="821" class="panel-sublabel" font-size="36">タップして相談 →</text>
+
+  <!-- Panel 3: 賃貸相談 (Orange) -->
+  <rect x="1667" y="0" width="833" height="843" fill="url(#grad-rent)"/>
+  <circle cx="2083" cy="320" r="260" fill="rgba(255,255,255,0.06)"/>
+  <circle cx="2400" cy="700" r="140" fill="rgba(255,255,255,0.04)"/>
+  <!-- Icon background circle -->
+  <circle cx="2083" cy="290" r="130" fill="rgba(255,255,255,0.15)"/>
+  <!-- Key icon (SVG shapes) -->
+  <g transform="translate(2083, 270)">
+    <!-- Key ring (circle) -->
+    <circle cx="-30" cy="-30" r="55" fill="none" stroke="rgba(255,255,255,0.95)" stroke-width="22"/>
+    <!-- Key ring hole -->
+    <circle cx="-30" cy="-30" r="22" fill="rgba(255,255,255,0.95)"/>
+    <!-- Key shaft -->
+    <rect x="10" y="-8" width="110" height="22" rx="11" fill="rgba(255,255,255,0.95)"/>
+    <!-- Key teeth -->
+    <rect x="75" y="14" width="18" height="28" rx="4" fill="rgba(255,255,255,0.95)"/>
+    <rect x="105" y="14" width="18" height="20" rx="4" fill="rgba(255,255,255,0.95)"/>
+  </g>
+  <text x="2083" y="510" class="panel-label" font-size="72">賃貸物件を探したい</text>
+  <text x="2083" y="598" class="panel-sublabel" font-size="48">賃貸・お部屋探し</text>
+  <rect x="1667" y="800" width="833" height="43" fill="rgba(255,255,255,0.15)"/>
+  <text x="2083" y="821" class="panel-sublabel" font-size="36">タップして相談 →</text>
+
+  <!-- ===================== ROW 2 ===================== -->
+
+  <!-- Panel 4: 内見予約 (Purple) -->
+  <rect x="0" y="843" width="833" height="843" fill="url(#grad-appt)"/>
+  <circle cx="416" cy="1163" r="240" fill="rgba(255,255,255,0.06)"/>
+  <!-- Icon background circle -->
+  <circle cx="416" cy="1133" r="130" fill="rgba(255,255,255,0.15)"/>
+  <!-- Calendar icon (SVG shapes) -->
+  <g transform="translate(416, 1133)">
+    <!-- Calendar body -->
+    <rect x="-75" y="-55" width="150" height="130" rx="10" fill="rgba(255,255,255,0.95)"/>
+    <!-- Calendar header -->
+    <rect x="-75" y="-55" width="150" height="42" rx="10" fill="#4a148c"/>
+    <rect x="-75" y="-34" width="150" height="21" fill="#4a148c"/>
+    <!-- Ring left -->
+    <rect x="-48" y="-72" width="20" height="36" rx="10" fill="rgba(255,255,255,0.9)"/>
+    <!-- Ring right -->
+    <rect x="28" y="-72" width="20" height="36" rx="10" fill="rgba(255,255,255,0.9)"/>
+    <!-- Date dots grid -->
+    <circle cx="-45" cy="15" r="8" fill="#4a148c"/>
+    <circle cx="-15" cy="15" r="8" fill="#4a148c"/>
+    <circle cx="15" cy="15" r="8" fill="#4a148c"/>
+    <circle cx="45" cy="15" r="8" fill="#4a148c"/>
+    <circle cx="-45" cy="45" r="8" fill="#4a148c"/>
+    <circle cx="-15" cy="45" r="8" fill="#4a148c"/>
+    <!-- Highlighted date -->
+    <circle cx="15" cy="45" r="16" fill="#7b1fa2"/>
+    <text x="15" y="46" font-family="sans-serif" font-size="18" font-weight="900" fill="white" text-anchor="middle" dominant-baseline="middle">✓</text>
+    <circle cx="45" cy="45" r="8" fill="#4a148c"/>
+  </g>
+  <text x="416" y="1353" class="panel-label" font-size="72">内見・相談を予約</text>
+  <text x="416" y="1441" class="panel-sublabel" font-size="48">日時を指定して予約</text>
+  <rect x="0" y="1643" width="833" height="43" fill="rgba(255,255,255,0.15)"/>
+  <text x="416" y="1664" class="panel-sublabel" font-size="36">タップして予約 →</text>
+
+  <!-- Panel 5: 担当者に話す (Teal) -->
+  <rect x="833" y="843" width="834" height="843" fill="url(#grad-agent)"/>
+  <circle cx="1250" cy="1163" r="240" fill="rgba(255,255,255,0.06)"/>
+  <!-- Icon background circle -->
+  <circle cx="1250" cy="1133" r="130" fill="rgba(255,255,255,0.15)"/>
+  <!-- Chat bubble icon -->
+  <g transform="translate(1250, 1133)">
+    <!-- Main bubble -->
+    <rect x="-80" y="-65" width="160" height="110" rx="20" fill="rgba(255,255,255,0.95)"/>
+    <!-- Bubble tail -->
+    <polygon points="-30,45 -60,80 10,45" fill="rgba(255,255,255,0.95)"/>
+    <!-- Dots inside bubble -->
+    <circle cx="-30" cy="-10" r="14" fill="#004d40"/>
+    <circle cx="0" cy="-10" r="14" fill="#004d40"/>
+    <circle cx="30" cy="-10" r="14" fill="#004d40"/>
+    <!-- Person icon above -->
+    <circle cx="60" cy="-90" r="28" fill="rgba(255,255,255,0.9)"/>
+    <ellipse cx="60" cy="-46" rx="22" ry="16" fill="rgba(255,255,255,0.85)"/>
+  </g>
+  <text x="1250" y="1353" class="panel-label" font-size="72">担当者に話したい</text>
+  <text x="1250" y="1441" class="panel-sublabel" font-size="48">スタッフに直接相談</text>
+  <!-- LIVE badge -->
+  <rect x="1000" y="873" width="130" height="56" rx="28" fill="rgba(255,80,80,0.9)"/>
+  <circle cx="1027" cy="901" r="10" fill="white"/>
+  <text x="1085" y="902" class="badge" font-size="30" fill="white">LIVE</text>
+  <rect x="833" y="1643" width="834" height="43" fill="rgba(255,255,255,0.15)"/>
+  <text x="1250" y="1664" class="panel-sublabel" font-size="36">タップして相談 →</text>
+
+  <!-- Panel 6: 無料査定 (Red/Crimson) -->
+  <rect x="1667" y="843" width="833" height="843" fill="url(#grad-valuation)"/>
+  <circle cx="2083" cy="1163" r="240" fill="rgba(255,255,255,0.06)"/>
+  <!-- Icon background circle -->
+  <circle cx="2083" cy="1133" r="130" fill="rgba(255,255,255,0.15)"/>
+  <!-- Graph/chart icon -->
+  <g transform="translate(2083, 1133)">
+    <!-- Chart background -->
+    <rect x="-80" y="-70" width="160" height="140" rx="10" fill="rgba(255,255,255,0.95)"/>
+    <!-- X axis -->
+    <line x1="-60" y1="40" x2="65" y2="40" stroke="#b71c1c" stroke-width="6" stroke-linecap="round"/>
+    <!-- Y axis -->
+    <line x1="-60" y1="-50" x2="-60" y2="40" stroke="#b71c1c" stroke-width="6" stroke-linecap="round"/>
+    <!-- Bar 1 -->
+    <rect x="-46" y="5" width="28" height="35" rx="4" fill="#b71c1c" opacity="0.7"/>
+    <!-- Bar 2 -->
+    <rect x="-6" y="-10" width="28" height="50" rx="4" fill="#b71c1c" opacity="0.85"/>
+    <!-- Bar 3 (tallest) -->
+    <rect x="34" y="-45" width="28" height="85" rx="4" fill="#b71c1c"/>
+    <!-- Up arrow -->
+    <polyline points="-46,-5 -6,-20 34,-55" fill="none" stroke="rgba(255,200,0,0.9)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="34,-55 48,-42 20,-50" fill="rgba(255,200,0,0.9)"/>
+  </g>
+  <text x="2083" y="1353" class="panel-label" font-size="72">無料査定を依頼する</text>
+  <text x="2083" y="1441" class="panel-sublabel" font-size="48">物件の価値を今すぐ確認</text>
+  <!-- FREE badge -->
+  <rect x="1697" y="873" width="160" height="56" rx="28" fill="rgba(255,200,0,0.9)"/>
+  <text x="1777" y="902" class="badge" fill="#1a1a1a" font-size="32">無料</text>
+  <rect x="1667" y="1643" width="833" height="43" fill="rgba(255,255,255,0.15)"/>
+  <text x="2083" y="1664" class="panel-sublabel" font-size="36">タップして依頼 →</text>
+
+  <!-- ===================== DIVIDERS ===================== -->
+  <!-- Vertical dividers -->
+  <line x1="833" y1="0" x2="833" y2="1686" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
+  <line x1="1667" y1="0" x2="1667" y2="1686" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
+  <!-- Horizontal divider -->
+  <line x1="0" y1="843" x2="2500" y2="843" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
+
+</svg>
